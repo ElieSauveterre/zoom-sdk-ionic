@@ -47,6 +47,10 @@ var zoom = {
         callNativeFunction('setLocale', [languageTag], success, error);
     }
 
+    getMeetingStatus: function(success, error) {
+        callNativeFunction('getMeetingStatus', [], success, error);
+    }
+
 };
 
 module.exports = zoom;

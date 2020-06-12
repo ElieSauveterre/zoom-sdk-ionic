@@ -130,6 +130,9 @@ public class Zoom extends CordovaPlugin implements ZoomSDKAuthenticationListener
                 String languageTag = args.getString(0);
                 this.setLocale(languageTag, callbackContext);
                 break;
+            case "getMeetingStatus":
+                this.getMeetingStatus(callbackContext);
+                break;
             default:
                 return false;
         }
@@ -1132,5 +1135,23 @@ public class Zoom extends CordovaPlugin implements ZoomSDKAuthenticationListener
             Log.v(TAG, "******getMeetingErrorMessage*********" + message.toString());
         }
         return message.toString();
+    }
+
+    /**
+     * getMeetingStatus
+     * <p>
+     * Get meeting status
+     *
+     * @param callbackContext cordova callback context.
+     */
+    private void getMeetingStatus(CallbackContext callbackContext) {
+
+        // Get Zoom SDK instance.
+        ZoomSDK zoomSDK = ZoomSDK.getInstance();
+
+        // Get meeting service instance.
+        MeetingService meetingService = zoomSDK.getMeetingService();
+
+        callbackContext.success(meetingService.getMeetingStatus().toString());
     }
 }
